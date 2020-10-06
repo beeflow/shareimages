@@ -6,4 +6,13 @@ from users.models import User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    pass
+    def followers_count(self, instance: User):
+        return instance.followers.count()
+
+    def followed_count(self, instance: User):
+        return instance.followed.count()
+
+    followers_count.short_description = "follows"
+    followed_count.short_description = "followed by"
+
+    list_display = ("username", "is_superuser", "followers_count", "followed_count")

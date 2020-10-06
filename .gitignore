@@ -242,3 +242,4 @@ modules.xml
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm+all
 
 shareimages/local.py
+htmlcov

@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     def followed_count(self, instance: User):
         return instance.followed.count()
 
-    followers_count.short_description = "follows"
-    followed_count.short_description = "followed by"
+    followers_count.short_description = "followed by"
+    followed_count.short_description = "follows"
 
     list_display = ("username", "is_superuser", "followers_count", "followed_count")

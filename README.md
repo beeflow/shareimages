@@ -8,7 +8,7 @@ Before you send your code to remote repository, please run all test locally
 
 ```
 $ safety check --full-report
-$ black --check -l 120 --exclude="(migrations)" --exclude=venv .
+$ black --check -l 120 --exclude=migrations --exclude=venv .
 $ flake8 .
 $ bandit -x tests,./venv/ -r .
 $ isort --check-only --diff .
@@ -17,6 +17,6 @@ $ coverage run --omit="venv/*" --branch --source=. ./manage.py test
 
 You can run this commands to fix some bugs from static code analysis:
 ```
-$ black -l 120 --exclude="(migrations)" --exclude=venv .
+$ black -l 120 --exclude=migrations --exclude=venv .
 $ isort .
 ```

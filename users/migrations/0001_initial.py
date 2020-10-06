@@ -116,4 +116,8 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
+        migrations.AlterUniqueTogether(
+            name='followers',
+            unique_together={('user', 'follow')},
+        ),
     ]

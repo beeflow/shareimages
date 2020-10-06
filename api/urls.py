@@ -7,4 +7,5 @@ app_name = "api"
 urlpatterns = [
     path("auth/register", views.CreateUserView.as_view(), name="register"),
     path("auth/", include("djoser.urls.authtoken")),
+    path("users/", views.UsersView.as_view(), name="users"),
 ]

@@ -1,5 +1,5 @@
 **Production**
-1. copy `.env.dist` to `.env` and set all variables
+1. copy `.env.dist` to `.env` and set all variables if needed
 1. run z `docker-compose up`
 There will be a new user automatically created with username `admin` and password `h98yt54y5rd`
 

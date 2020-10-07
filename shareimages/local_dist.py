@@ -2,15 +2,5 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-SECURE_HSTS_PRELOAD = False
-SECURE_HSTS_SECONDS = 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-
-CSRF_COOKIE_SECURE = False
-
-SESSION_COOKIE_SECURE = False
-
-LANGUAGE_COOKIE_SECURE = False
-
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 MEDIA_URL = "media/"

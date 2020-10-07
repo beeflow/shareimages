@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from posts.models import Post
+from users.models import Followers
 from .serializers.postserializer import PostSerializer
 from .serializers.userserializer import RegisterUserSerializer, UserSerializer
 
@@ -20,6 +21,28 @@ class CreateUserView(CreateAPIView):
 class UsersView(ListAPIView):
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+
+
+class FollowView(APIView):
+    def get(self, request, pk):
+        UserModel = get_user_model()
+        try:
+            user = UserModel.objects.get(pk=pk)
+            request.user.follow(user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except UserModel.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class UnfollowView(APIView):
+    def get(self, request, pk):
+        UserModel = get_user_model()
+        try:
+            user = UserModel.objects.get(pk=pk)
+            request.user.unfollow(user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except UserModel.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class AddPostView(APIView):
@@ -53,6 +76,7 @@ class LikePostView(APIView):
         try:
             post = Post.objects.get(pk=pk)
             post.like(request.user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except Post.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -62,6 +86,7 @@ class UnlikePostView(APIView):
         try:
             post = Post.objects.get(pk=pk)
             post.unlike(request.user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except Post.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -69,3 +94,18 @@ class UnlikePostView(APIView):
 class PostsListView(ListAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all().order_by("likes")
+
+
+class UserPostsListView(ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user).order_by("-created_at")
+
+
+class FollowedUsersPostsListView(ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        users_followed = [followers.follow for followers in Followers.objects.filter(user=self.request.user)]
+        return Post.objects.filter(owner__in=users_followed).order_by("-created_at")

@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.auth import get_user_model
 from django.db import models, IntegrityError
+from django.utils import timezone
 
 UserModel = get_user_model()
 
@@ -16,6 +17,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to=uploaded_image_name)
     owner = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="posts")
     caption = models.CharField(max_length=100, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
 
     @property
     def liked_by(self):

@@ -1,3 +1,8 @@
+
+**API Documentation**
+
+API documentation can be found on https://www.postman.com/collections/e8a6586e6f59d07cbb3a
+
 **Development**
 1. copy `local_dist.py` to `local.py` in `shareimages` folder.
 1. run `pip -r requirements_devel.txt`

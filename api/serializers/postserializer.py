@@ -16,7 +16,6 @@ class PostSerializer(serializers.ModelSerializer):
     def get_likes(self, instance):
         return instance.liked_by.count()
 
-
     class Meta:
         model = Post
         fields = "__all__"

@@ -42,8 +42,9 @@ class UsersListTest(TestCase):
         username, password = self.faker.first_name(), self.faker.password()
 
         self.UserModel.objects.create_user(username=username, password=password)
-        self.UserModel.objects.create_user(username=self.faker.profile().get("username"),
-                                           password=self.faker.password())
+        self.UserModel.objects.create_user(
+            username=self.faker.profile().get("username"), password=self.faker.password()
+        )
 
         response = self.client.get(reverse("api:users"), format="json")
         self.assertEqual(response.data.get("detail"), "Authentication credentials were not provided.")
@@ -52,8 +53,9 @@ class UsersListTest(TestCase):
         username, password = self.faker.first_name(), self.faker.password()
 
         self.UserModel.objects.create_user(username=username, password=password)
-        self.UserModel.objects.create_user(username=self.faker.profile().get("username"),
-                                           password=self.faker.password())
+        self.UserModel.objects.create_user(
+            username=self.faker.profile().get("username"), password=self.faker.password()
+        )
 
         response = self.client.post(reverse("api:login"), {"username": username, "password": password}, format="json")
         token = response.data.get("auth_token")

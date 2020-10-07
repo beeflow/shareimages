@@ -10,7 +10,6 @@ urlpatterns = [
     path("users/", views.UsersView.as_view(), name="users"),
     path("users/follow/<pk>", views.FollowView.as_view(), name="users_follow"),
     path("users/unfollow/<pk>", views.UnfollowView.as_view(), name="users_unfollow"),
-
     re_path(r"^posts/upload_image/(?P<filename>[^/]+)$", views.AddPostView.as_view(), name="posts_add_image"),
     path("posts/add_caption/<pk>", views.AddPostCaptionView.as_view(), name="posts_add_caption"),
     path("posts/like/<pk>", views.LikePostView.as_view(), name="posts_like"),

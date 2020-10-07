@@ -1,7 +1,7 @@
 import uuid
 
 from django.contrib.auth import get_user_model
-from django.db import models, IntegrityError
+from django.db import IntegrityError, models
 from django.utils import timezone
 
 UserModel = get_user_model()

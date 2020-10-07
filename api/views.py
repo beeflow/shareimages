@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 
 from posts.models import Post
 from users.models import Followers
+
 from .serializers.postserializer import PostSerializer
 from .serializers.userserializer import RegisterUserSerializer, UserSerializer
 
@@ -49,7 +50,7 @@ class AddPostView(APIView):
     parser_classes = (FileUploadParser,)
 
     def post(self, request: Request, filename=None):
-        file_obj = request.data['file']
+        file_obj = request.data["file"]
         post = Post.objects.create(image=file_obj, owner=request.user)
 
         return Response({"id": str(post.id)}, status=status.HTTP_201_CREATED)

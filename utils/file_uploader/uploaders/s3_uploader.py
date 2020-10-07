@@ -8,7 +8,8 @@ class S3Uploader:
     @staticmethod
     def __get_s3_resource():
         session = boto3.Session(
-            aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
         )
         return session.resource("s3")
 
